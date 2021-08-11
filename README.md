@@ -1,7 +1,7 @@
 # obscure-password
 
 [![Python package](https://github.com/Shapedsundew9/obscure-password/actions/workflows/python-package.yml/badge.svg?branch=main)](https://github.com/Shapedsundew9/obscure-password/actions/workflows/python-package.yml)
-[![codecov](https://codecov.io/gh/Shapedsundew9/pypgtable/branch/main/graph/badge.svg?token=Z9C9Z9B3T1)](https://codecov.io/gh/Shapedsundew9/obscure-password)
+[![codecov](https://codecov.io/gh/Shapedsundew9/obscure-password/branch/main/graph/badge.svg?token=ZDKW1280KN)](https://codecov.io/gh/Shapedsundew9/obscure-password)
 
 ## Sunburst Code Coverage Chart
 
