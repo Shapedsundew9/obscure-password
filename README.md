@@ -23,7 +23,7 @@ obscure_password laces the obscured text with a marker which enables it to avoid
 'my sensitive information'
 ```
 This is helpful when developing a script and wanting to regularly change the password.
-obscure-password was designed for password ofuscation and not to obscure large texts (although it can). The marker implementation significantly increases the length of the obscured text.
+obscure-password was designed for password obfuscation and not to obscure large texts (although it can). The marker implementation significantly increases the length of the obscured text.
 ## Sunburst Code Coverage Chart
 
  The inner-most circle is the entire project, moving away from the center are folders then, finally, a single file. The size and color of each slice is representing the number of statements and the coverage, respectively.
