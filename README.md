@@ -7,23 +7,34 @@
 
 obscure-password is a self contained obfuscation library for hardcoded passwords (or other text) in Python scripts. Obfuscation is a technique to prevent the unskilled or casual observer access to sensitive data and provide an impediment to the skilled i.e. requiring explicit effort to circumvent.
 Typical use cases are in casual software development or  debugging where a developer may be sharing scripts with field technicians to perform one-off tasks.
+
 ## Usage
+
 ```python
 >>> from obscure_password import obscure, unobscure
->>> obscure('my sensitive information')
+>>> obscured = obscure('my sensitive information')
 >>> print(obscured)
-gNA0AlAmAMATBQh7EN8SOs_l1BIBU4tjgbyy28CknMagGogf7JhFHU35GLmzV0AA
+fxFpdVRHWRJjTkFnN0lmMTQ7NSslBB4jby8kMgofJFU5Lz0A
 >>> unobscure(obscured)
 'my sensitive information'
 ```
+
 obscure_password laces the obscured text with a marker which enables it to avoid unobscuring text that has not been obscured.
+
 ```python
 >>> from obscure_password import obscure, unobscure
 >>> unobscure('my sensitive information')
 'my sensitive information'
 ```
+
 This is helpful when developing a script and wanting to regularly change the password.
-obscure-password was designed for password obfuscation and not to obscure large texts (although it can). The marker implementation significantly increases the length of the obscured text.
+
+## Limitations
+
+- Ofuscation is NOT secure!
+- obscure-password was designed for password obfuscation and not to obscure large texts. The base64 encoding increases the obscured text length by x1.25 plus 16 characters, for the marker, over the original text length.
+- The text size obscured / unobscured is unrestricted (limited by RAM & patience). As a first approximation for large texts memory required is +1.25x the original text size.
+
 ## Sunburst Code Coverage Chart
 
  The inner-most circle is the entire project, moving away from the center are folders then, finally, a single file. The size and color of each slice is representing the number of statements and the coverage, respectively.

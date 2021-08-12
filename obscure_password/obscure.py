@@ -11,13 +11,15 @@ _SCHMOOSH = (
     b'LRGgwMVJuNElab2hoUl9HazRaRWZXSURmNGduYjNiTzdGWVNFa2pzdk5IMGtMTn!'
     b'hiLWk4bjZXWFNhWGdzVFBBNG5VNWF0SEdZUVJDMXNBRmVONmVXdmQ0X29BaGk=&*'
 )
-_IDENTITY = (
-    'gAAAAABhE8O_1IUtgy2CnaGg7hH3GmVAULBlRkpGxnSl3Kpm4HHygfDCcs1pqkMN'
-    'Iyy482vB4dV81S62UaNXjaDcgBv7PEbtSBpt7GtVomXt_wnDpr5qq-ZlZsxeRfxD'
-    'M633KszF3_wMZjzFE0zKClrrnoxJL1ri23w1mxhJO2lQS_ny-iTw_c3nVZUL-Crj'
-)
-_S_LEN = len(_SCHMOOSH)
+_IDENTITY = b'_1IUtgy2CnaG'
 _I_LEN = len(_IDENTITY)
+_I_B64_LEN = (_I_LEN * 4 + 1) // 3
+
+
+def _schmoosh_generator():
+    while True:
+        for s in _SCHMOOSH:
+            yield s
 
 
 def obscure(text):
@@ -34,10 +36,11 @@ def obscure(text):
     (str) Obscured text.
     """
     _logger.debug('Obscuring text ********')
-    schmoosh = (_SCHMOOSH * (int(len(text) / _S_LEN) + 1))
-    xor = b64encode(bytes((_s ^ _t for _s, _t in zip(schmoosh, bytes(text, 'utf-8'))))).decode('utf-8')
-    marker = (_IDENTITY * (int(len(xor) / _I_LEN) + 1))
-    return ''.join((i + x for i, x in zip(marker, xor)))
+    schmoosh = _schmoosh_generator()
+    xor = b64encode(bytes((next(schmoosh) ^ bytes(t, 'utf-8')[0] for t in text))).decode('utf-8')
+    filter = len(xor) & 0xFF
+    marker = b64encode((bytes((i ^ filter for i in _IDENTITY)))).decode('utf-8')
+    return marker + xor
 
 
 def unobscure(otext):
@@ -55,10 +58,11 @@ def unobscure(otext):
     (str) Unobscured (orginal) text.
     """
     tl = len(otext)
+    filter = (tl - _I_B64_LEN) & 0xFF
+    marker = b64encode((bytes((i ^ filter for i in _IDENTITY)))).decode('utf-8')
     _logger.debug(f'Unobscuring {otext[:min(8, tl)]}...')
-    identity = (_IDENTITY * (int(tl / _I_LEN) + 1))
-    if identity[:tl // 2] == otext[0:tl:2]:
-        b64 = otext[1:tl:2]
-        schmoosh = (_SCHMOOSH * (int(len(b64) / _S_LEN) + 1))
-        return bytes((_s ^ _t for _s, _t in zip(schmoosh, b64decode(b64)))).decode('utf-8')
+    if otext[:_I_B64_LEN] == marker:
+        b64 = otext[_I_B64_LEN:]
+        schmoosh = _schmoosh_generator()
+        return bytes((next(schmoosh) ^ b for b in b64decode(b64))).decode('utf-8')
     return otext
