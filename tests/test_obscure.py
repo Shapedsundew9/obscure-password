@@ -3,6 +3,7 @@ from random import choices, randint
 from string import printable
 
 import pytest
+
 from obscure_password import obscure, unobscure
 
 
