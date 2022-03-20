@@ -37,7 +37,7 @@ def obscure(text):
     """
     _logger.debug('Obscuring text ********')
     schmoosh = _schmoosh_generator()
-    xor = b64encode(bytes((next(schmoosh) ^ bytes(t, 'utf-8')[0] for t in text))).decode('utf-8')
+    xor = b64encode(bytes((next(schmoosh) ^ b for t in text for b in bytes(t, 'utf-8')))).decode('utf-8')
     filter = len(xor) & 0xFF
     marker = b64encode((bytes((i ^ filter for i in _IDENTITY)))).decode('utf-8')
     return marker + xor
