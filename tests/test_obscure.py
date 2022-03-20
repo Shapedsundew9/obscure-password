@@ -3,7 +3,6 @@ from random import choices, randint
 from string import printable
 
 import pytest
-
 from obscure_password import obscure, unobscure
 
 
@@ -15,17 +14,17 @@ def test_random_obscurity(_):
 
 
 @pytest.mark.parametrize("phrase",
-                            (
-                                '你好',
-                                'Nǐ hǎo',
-                                '早上好',
-                                'Zǎoshang hǎo',
-                                '混淆很有趣',
-                                'Hùnxiáo hěn yǒuqù',
-                                '感谢 LifelongStew7 发现了非 ASCII 字符错误！',
-                                'Gǎnxiè LifelongStew7 fāxiànle fēi ASCII zìfú cuòwù!'
-                            )
-                        )
+                         (
+                             '你好',
+                             'Nǐ hǎo',
+                             '早上好',
+                             'Zǎoshang hǎo',
+                             '混淆很有趣',
+                             'Hùnxiáo hěn yǒuqù',
+                             '感谢 LifelongStew7 发现了非 ASCII 字符错误！',
+                             'Gǎnxiè LifelongStew7 fāxiànle fēi ASCII zìfú cuòwù!'
+                         )
+                         )
 def test_non_ascii(phrase):
     """Some Chinese phrases."""
     assert unobscure(obscure(phrase)) == phrase
