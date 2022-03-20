@@ -31,11 +31,11 @@ def test_non_ascii(phrase):
     assert unobscure(obscure(phrase)) == phrase
 
 
-def test_random_unmarked():
+@pytest.mark.parametrize("_", range(1000))
+def test_random_unmarked(_):
     """Check unobscure does not modify 1000 randomly generated ASCII strings."""
-    for _ in range(1000):
-        text = ''.join(choices(printable, k=randint(1, 1024)))
-        assert unobscure(text) == text
+    text = ''.join(choices(printable, k=randint(1, 1024)))
+    assert unobscure(text) == text
 
 
 def test_corner_0():
