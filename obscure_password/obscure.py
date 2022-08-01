@@ -55,7 +55,7 @@ def unobscure(otext):
 
     Returns
     -------
-    (str) Unobscured (orginal) text.
+    (str) Unobscured (original) text.
     """
     tl = len(otext)
     filter = (tl - _I_B64_LEN) & 0xFF

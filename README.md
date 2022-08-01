@@ -31,7 +31,7 @@ This is helpful when developing a script and wanting to regularly change the pas
 
 ## Limitations
 
-- Ofuscation is NOT secure!
+- Obfuscation is NOT secure!
 - obscure-password was designed for password obfuscation and not to obscure large texts. The base64 encoding increases the obscured text length by x1.25 plus 16 characters, for the marker, over the original text length.
 - The text size obscured / unobscured is unrestricted (limited by RAM & patience). As a first approximation for large texts memory required is +1.25x the original text size.
 
