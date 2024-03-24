@@ -109,7 +109,8 @@ argument-naming-style=snake_case
 # Regular expression matching correct argument names. Overrides argument-
 # naming-style. If left empty, argument names will be checked with the set
 # naming style.
-#argument-rgx=
+argument-rgx=^[_a-z][a-z0-9]*((_[a-z0-9]+|GC)+)*_{0,1}$
+
 
 # Naming style matching correct attribute names.
 attr-naming-style=snake_case
@@ -117,7 +118,8 @@ attr-naming-style=snake_case
 # Regular expression matching correct attribute names. Overrides attr-naming-
 # style. If left empty, attribute names will be checked with the set naming
 # style.
-#attr-rgx=
+attr-rgx=^[_a-z][a-z0-9]*((_[a-z0-9]+|GC)+)*_{0,1}$
+
 
 # Bad variable names which should always be refused, separated by a comma.
 bad-names=foo,
@@ -172,7 +174,8 @@ function-naming-style=snake_case
 # Regular expression matching correct function names. Overrides function-
 # naming-style. If left empty, function names will be checked with the set
 # naming style.
-#function-rgx=
+function-rgx=(^[_a-z][a-z0-9]*((_[a-z0-9]+|GC)+)*_{0,1})|(is[a-zA-Z0-9]+)$
+
 
 # Good variable names which should always be accepted, separated by a comma.
 good-names=i,
@@ -201,14 +204,17 @@ method-naming-style=snake_case
 
 # Regular expression matching correct method names. Overrides method-naming-
 # style. If left empty, method names will be checked with the set naming style.
-#method-rgx=
+method-rgx=^[_a-z]+[a-z0-9]*((_[a-z0-9]+|GC)+)*_{0,2}$
+
+
 
 # Naming style matching correct module names.
 module-naming-style=snake_case
 
 # Regular expression matching correct module names. Overrides module-naming-
 # style. If left empty, module names will be checked with the set naming style.
-#module-rgx=
+module-rgx=^[_a-z][a-z0-9]*((_[a-z0-9]+|GC)+)*_{0,1}$
+
 
 # Colon-delimited sets of names that determine each other's naming style when
 # the name regexes allow several styles.
@@ -233,7 +239,8 @@ variable-naming-style=snake_case
 # Regular expression matching correct variable names. Overrides variable-
 # naming-style. If left empty, variable names will be checked with the set
 # naming style.
-#variable-rgx=
+variable-rgx=^[_a-z][a-z0-9]*((_[a-z0-9]+|GC)+)*_{0,1}$
+
 
 
 [CLASSES]
@@ -273,31 +280,30 @@ exclude-too-few-public-methods=
 ignored-parents=
 
 # Maximum number of arguments for function / method.
-max-args=5
+max-args=12
 
 # Maximum number of attributes for a class (see R0902).
-max-attributes=7
+max-attributes=99
 
 # Maximum number of boolean expressions in an if statement (see R0916).
 max-bool-expr=5
 
 # Maximum number of branch for function / method body.
-max-branches=12
-
+max-branches=50
 # Maximum number of locals for function / method body.
-max-locals=15
+max-locals=99
 
 # Maximum number of parents for a class (see R0901).
 max-parents=7
 
 # Maximum number of public methods for a class (see R0904).
-max-public-methods=20
+max-public-methods=99
 
 # Maximum number of return / yield for function / method body.
-max-returns=6
+max-returns=10
 
 # Maximum number of statements in function / method body.
-max-statements=50
+max-statements=99
 
 # Minimum number of public methods for a class (see R0903).
 min-public-methods=2
@@ -446,7 +452,7 @@ notes-rgx=
 [REFACTORING]
 
 # Maximum number of nested blocks for function / method body
-max-nested-blocks=5
+max-nested-blocks=10
 
 # Complete name of functions that never returns. When checking for
 # inconsistent-return-statements if a never returning function is called then
